@@ -14,9 +14,10 @@ from datetime import datetime
 class ParseCSV:
     def __init__(self,fname):
         self.sortedlist = None
-        
+        print('Parsing {0} ... '.format(fname))
         if not os.path.exists(fname):
             print('File does not exist')
+            return
         with open(fname) as reader:
             csvobj = csv.reader(reader)
             self.sortedlist = sorted(csvobj,key=operator.itemgetter(10))
@@ -63,7 +64,9 @@ class ParseCSV:
     
     
 if __name__ == '__main__':
+    
     ParseCSVobj = ParseCSV('Mobile Phone Masts.csv')
+    
     if ParseCSVobj.sortedlist is None:
         sys.exit()
     print ('''Enter the filter/display option:
