@@ -7,7 +7,6 @@ Created on 26 Sep 2019
 import os
 import sys
 import csv
-import operator
 from datetime import datetime
 
 
@@ -20,8 +19,9 @@ class ParseCSV:
             return
         with open(fname) as reader:
             csvobj = csv.reader(reader)
-            self.sortedlist = sorted(csvobj,key=operator.itemgetter(10))
-            del self.sortedlist[-1]
+            next(csvobj, None)
+            self.sortedlist = sorted(csvobj,key=lambda x: int(x[10].split('.')[0]))
+    
             
     def sortbyrent(self):
         print('\n\n1: produce a list sorted by Current Rent in ascending order. Obtain the first 5 items from the resultant list and  output to the console\n')
